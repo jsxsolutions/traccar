@@ -9,8 +9,10 @@ repositories {
     mavenCentral()
 }
 
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
+if (INCLUDE_ANDROID == "true") {
+    include 'android', 'android:app'
+}
+
 
 ext {
     guiceVersion = "5.0.1"
