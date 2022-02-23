@@ -9,12 +9,9 @@ repositories {
     mavenCentral()
 }
 
-tasks.stage.doLast() {
-    delete fileTree(dir: "build/distributions")
-    delete fileTree(dir: "build/assetCompile")
-    delete fileTree(dir: "build/distributions")
-    delete fileTree(dir: "build/libs", exclude: "*.war")
-}
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
 ext {
     guiceVersion = "5.0.1"
     jettyVersion = "10.0.6" // jetty 11 javax to jakarta
